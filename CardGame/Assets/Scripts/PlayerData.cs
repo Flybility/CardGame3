@@ -78,14 +78,14 @@ public class PlayerData : MonoSingleton<PlayerData>
         currentHealth = maxHealth;
         HealthBarChange();
 
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(3));
-          playerMonsterCards.Add(cardData.CopyMonsterCard(8));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(9));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(36));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(5));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(5));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(6));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(7));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(3));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(8));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(38));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(30));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(5));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(5));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(6));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(7));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(15));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(16));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(28));

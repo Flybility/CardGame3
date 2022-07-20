@@ -20,6 +20,6 @@ public class Monster12 : MonoBehaviour
     }
     private void OnDestroy()
     {
-        PlayerData.Instance.StartAddTempAttacks(value);
+        if (BattleField.Instance.isFinished == false && monster.isSwallowed == false) PlayerData.Instance.StartAddTempAttacks(value);
     }
 }

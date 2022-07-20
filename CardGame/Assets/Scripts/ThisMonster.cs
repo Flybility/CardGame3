@@ -71,6 +71,7 @@ public class ThisMonster : MonoBehaviour
     public bool isIntervalAttack;
     public bool isBesideAttack;
     public bool isBesideRecover;
+    public bool isSummonMonster;
     public bool isSelfArmored;
     public int selfArmoredValue;
     public bool isBesideArmored;

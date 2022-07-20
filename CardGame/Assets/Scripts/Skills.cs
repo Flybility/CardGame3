@@ -85,6 +85,42 @@ public class Skills : MonoSingleton<Skills>
     {
         PlayerData.Instance.HealthRecover(value);
     }
+    public void StartLightingInterval(ThisMonster thisMonster, int damage)
+    {
+        StartCoroutine(LightingInterval(thisMonster,damage));
+    }
+    IEnumerator LightingInterval(ThisMonster thisMonster,int damage)
+    {
+        isBooming = true;
+        if (BattleField.Instance.isFinished == false)
+        {
+
+            AudioManager.Instance.boom1.Play();
+            List<GameObject> monsters = BlocksManager.Instance.GetInterval(thisMonster.block);
+            //播放爆炸动画
+            foreach (var monster in monsters)
+            {
+                yield return new WaitForSeconds(0.06f);
+                AttackMonster(damage, monster, false);
+                Instantiate(boomEffect, monster.transform.parent);
+                if (monster.GetComponent<ThisMonster>().isAddAlcohol)
+                {
+                    monster.GetComponent<ThisMonster>().AddBurns(2, burnsCounter);
+                }
+                if (monster.GetComponent<ThisMonster>().isAddExplodeDizzy)
+                {
+                    monster.GetComponent<ThisMonster>().AddDizzy(1, dizzyCounter);
+                }
+            }
+            //for (int i = 0; i < BlocksManager.Instance.backMonsters.Count; i++)
+            //{
+            //    //BlocksManager.Instance.backMonsters[i].GetComponent<ThisMonster>().HealthDecrease(damage);
+            //
+            //    AttackMonster(damage, BlocksManager.Instance.backMonsters[i]);
+            //}
+        }
+        isBooming = false;
+    }
     public void StartBoom(ThisMonster thisMonster, int damage)
     {
         StartCoroutine(BoomBeside(thisMonster, damage));
@@ -98,7 +134,7 @@ public class Skills : MonoSingleton<Skills>
             AudioManager.Instance.boom1.Play();
             List<GameObject> monsters = BlocksManager.Instance.GetNeighbours(thisMonster.block);
                 //播放爆炸动画
-            foreach (var monster in BlocksManager.Instance.GetNeighbours(thisMonster.block))
+            foreach (var monster in monsters)
             {
                 yield return new WaitForSeconds(0.06f);
                 AttackMonster(damage, monster,false);
@@ -274,6 +310,22 @@ public class Skills : MonoSingleton<Skills>
             monster.GetComponent<ThisMonster>().HealthRecover(count);
         }
     }
+    public void StartRecoverAll(int count)
+    {
+        StartCoroutine(RecoverAll(count));
+    }
+    IEnumerator RecoverAll(int count)
+    {
+        yield return new WaitForSeconds(0.5f);
+        foreach (var monster in BattleField.Instance.monsterInBattle)
+        {
+            monster.GetComponent<ThisMonster>().HealthRecover(count);
+        }
+    }
+    public void SummonMonster()
+    {
+        
+    }
     public void ArmoredBesides(Transform block, int count)
     {
         foreach (var monster in BlocksManager.Instance.GetNeighbours(block))
@@ -292,6 +344,39 @@ public class Skills : MonoSingleton<Skills>
     public void StartExchangeIntervalPosition(GameObject monster)
     {
         StartCoroutine(ExchangeIntervalPosition(monster));
+    }
+    public void StartExchangeMonsterGiven(GameObject monster1, GameObject monster2)
+    {
+        StartCoroutine(ExchangeMonsterGiven(monster1, monster2));
+    }
+    IEnumerator ExchangeMonsterGiven(GameObject monster1,GameObject monster2)
+    {
+        GameObject monsterCard1 = monster1.GetComponent<ThisMonster>().monsterCard;
+        GameObject monsterCard2 = monster2.GetComponent<ThisMonster>().monsterCard;
+        Transform block1 = monster1.GetComponent<ThisMonster>().block;
+        Transform block2 = monster2.GetComponent<ThisMonster>().block;
+
+        GameObject nextMonsterCard = monster2.GetComponent<ThisMonster>().monsterCard;
+        //
+        yield return new WaitForSeconds(0.05f);
+
+        AudioManager.Instance.Exchange.Play();
+
+        nextMonsterCard.transform.SetParent(block1);
+        monster2.transform.SetParent(block1);
+        
+        monster2.GetComponent<ThisMonster>().block = block1;
+
+
+        monsterCard1.transform.SetParent(block2);
+        monster1.transform.SetParent(block2);
+        
+        monster1.GetComponent<ThisMonster>().block = block2;
+
+        monster2.transform.DOLocalMove(Vector3.zero, 0.3f);
+        monster1.transform.DOLocalMove(Vector3.zero, 0.3f);
+
+        BlocksManager.Instance.MonsterChange();
     }
     IEnumerator ExchangeBesidePosition(GameObject monster)
     {

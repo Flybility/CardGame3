@@ -26,9 +26,13 @@ public class MouseOnMonster : MonoBehaviour,IPointerClickHandler,IPointerEnterHa
             BattleField.Instance.UseEquipment(thismonster.gameObject, BattleField.Instance.usingEquipment);
             //BattleField.Instance.usingEquipment = null;
         }
-        if(eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster==true&& BattleField.Instance.usingEquipment == null&& BattleField.Instance.SelectingMonster != 1)
+        if(eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster==true&& BattleField.Instance.usingEquipment == null&& BattleField.Instance.SelectingMonster != 1&&BattleField.Instance.chosenMonster==null)
         {
-            BattleField.Instance.ExchangeMonster(thismonster.gameObject);
+            BattleField.Instance.FirstMonster(thismonster.gameObject);
+        }
+        if (eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster == true && BattleField.Instance.usingEquipment == null && BattleField.Instance.SelectingMonster != 1 && BattleField.Instance.chosenMonster!=null)
+        {
+            BattleField.Instance.SecondMonster(thismonster.gameObject);
         }
     }
 

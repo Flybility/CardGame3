@@ -208,6 +208,7 @@ public class BattleField : MonoSingleton<BattleField>
         {
             DestroyArrow();
             CloseHighlightWithinMonster();
+            chosenMonster=null;
             exchangeMonster = false;
         }
     }
@@ -245,13 +246,26 @@ public class BattleField : MonoSingleton<BattleField>
             
         }
     }
-    public void ExchangeMonster(GameObject monster) 
+    public GameObject chosenMonster;
+    public void FirstMonster(GameObject monster) 
     {
         DestroyArrow();
         CloseHighlightWithinMonster();
-        Skills.Instance.StartExchangeBesidePosition(monster);
+        CreateArrow(monster.transform, ArrowPrefab);
+        OpenHighlightWithinMonster();
+        chosenMonster=monster;
+        //Skills.Instance.StartExchangeBesidePosition(monster);
+        //exchangeMonster = false;
+        //currentPlayerExchangeTime--;
+    }
+    public void SecondMonster(GameObject monster)
+    {
+        DestroyArrow();
+        CloseHighlightWithinMonster();
+        Skills.Instance.StartExchangeMonsterGiven(chosenMonster,monster);
         exchangeMonster = false;
         currentPlayerExchangeTime--;
+        chosenMonster=null;
     }
     //玩家抽牌
     public void PlayerExtractCard()
