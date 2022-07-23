@@ -5,9 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class MouseOnMonster : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
+public class MouseOnMonster : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler,IPointerDownHandler,IPointerUpHandler
 {
     ThisMonster thismonster;
+    //private static readonly object ClickLock = new object();
     // Start is called before the first frame update
     void Start()
     {
@@ -26,14 +27,7 @@ public class MouseOnMonster : MonoBehaviour,IPointerClickHandler,IPointerEnterHa
             BattleField.Instance.UseEquipment(thismonster.gameObject, BattleField.Instance.usingEquipment);
             //BattleField.Instance.usingEquipment = null;
         }
-        if(eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster==true&& BattleField.Instance.usingEquipment == null&& BattleField.Instance.SelectingMonster != 1&&BattleField.Instance.chosenMonster==null)
-        {
-            BattleField.Instance.FirstMonster(thismonster.gameObject);
-        }
-        if (eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster == true && BattleField.Instance.usingEquipment == null && BattleField.Instance.SelectingMonster != 1 && BattleField.Instance.chosenMonster!=null)
-        {
-            BattleField.Instance.SecondMonster(thismonster.gameObject);
-        }
+       
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -72,5 +66,22 @@ public class MouseOnMonster : MonoBehaviour,IPointerClickHandler,IPointerEnterHa
         //transform.DOScale(1, 0.1f);
         CursorFollow.Instance.description.transform.GetChild(0).GetComponent<Text>().text = null;
         CursorFollow.Instance.description.SetActive(false);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster == true && BattleField.Instance.usingEquipment == null && BattleField.Instance.SelectingMonster != 1 && BattleField.Instance.chosenMonster != null)
+        {
+            BattleField.Instance.SecondMonster(thismonster.gameObject);
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster == true && BattleField.Instance.usingEquipment == null && BattleField.Instance.SelectingMonster != 1 && BattleField.Instance.chosenMonster == null)
+        {
+            BattleField.Instance.FirstMonster(thismonster.gameObject);
+        }
+        
     }
 }

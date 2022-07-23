@@ -27,6 +27,10 @@ public class Blocks : MonoBehaviour, IPointerClickHandler
         {
             BattleField.Instance.SummonConfirm(transform, multipleAttacks, multipleAwards);            
         }
+        if (eventData.button == PointerEventData.InputButton.Left && BattleField.Instance.exchangeMonster == true && BattleField.Instance.usingEquipment == null && BattleField.Instance.SelectingMonster != 1 && BattleField.Instance.chosenMonster != null)
+        {
+            BattleField.Instance.SecondBlock(this.transform);
+        }
     }
 
     // Start is called before the first frame update

@@ -321,6 +321,7 @@ public class Skills : MonoSingleton<Skills>
         {
             monster.GetComponent<ThisMonster>().HealthRecover(count);
         }
+        RecoverPlayerHealth(count);
     }
     public void SummonMonster()
     {
@@ -348,6 +349,7 @@ public class Skills : MonoSingleton<Skills>
     public void StartExchangeMonsterGiven(GameObject monster1, GameObject monster2)
     {
         StartCoroutine(ExchangeMonsterGiven(monster1, monster2));
+        Debug.Log("exchange");
     }
     IEnumerator ExchangeMonsterGiven(GameObject monster1,GameObject monster2)
     {
@@ -377,6 +379,25 @@ public class Skills : MonoSingleton<Skills>
         monster1.transform.DOLocalMove(Vector3.zero, 0.3f);
 
         BlocksManager.Instance.MonsterChange();
+    }
+    public void StartTransformMonsterGivenToBlock(GameObject monster1,Transform block)
+    {
+        StartCoroutine(TransformMonsterGivenToBlock(monster1, block));
+    }
+    IEnumerator TransformMonsterGivenToBlock(GameObject monster, Transform nextBlock)
+    {
+        GameObject monsterCard = monster.GetComponent<ThisMonster>().monsterCard;
+        yield return new WaitForSeconds(0.05f);
+        AudioManager.Instance.Exchange.Play();
+        monsterCard.transform.SetParent(nextBlock);
+        monster.transform.SetParent(nextBlock);
+        //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
+        //monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
+        monster.GetComponent<ThisMonster>().block = nextBlock;
+        monster.transform.DOLocalMove(Vector3.zero, 0.3f);
+
+        BlocksManager.Instance.MonsterChange();
+       
     }
     IEnumerator ExchangeBesidePosition(GameObject monster)
     {
@@ -700,6 +721,6 @@ public class Skills : MonoSingleton<Skills>
         }
     }
 
-
+   
 
 }

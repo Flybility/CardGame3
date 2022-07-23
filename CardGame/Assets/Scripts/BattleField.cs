@@ -253,6 +253,7 @@ public class BattleField : MonoSingleton<BattleField>
         CloseHighlightWithinMonster();
         CreateArrow(monster.transform, ArrowPrefab);
         OpenHighlightWithinMonster();
+        Debug.Log("first");
         chosenMonster=monster;
         //Skills.Instance.StartExchangeBesidePosition(monster);
         //exchangeMonster = false;
@@ -262,10 +263,21 @@ public class BattleField : MonoSingleton<BattleField>
     {
         DestroyArrow();
         CloseHighlightWithinMonster();
+        Debug.Log("second");
         Skills.Instance.StartExchangeMonsterGiven(chosenMonster,monster);
         exchangeMonster = false;
         currentPlayerExchangeTime--;
         chosenMonster=null;
+    }
+    public void SecondBlock(Transform block)
+    {
+        DestroyArrow();
+        CloseHighlightWithinMonster();
+        Debug.Log("second");
+        Skills.Instance.StartTransformMonsterGivenToBlock(chosenMonster, block);
+        exchangeMonster = false;
+        currentPlayerExchangeTime--;
+        chosenMonster = null;
     }
     //玩家抽牌
     public void PlayerExtractCard()
@@ -399,6 +411,10 @@ public class BattleField : MonoSingleton<BattleField>
         }
 
     }
+    public void StartFlyToExtractArea()
+    {
+        StartCoroutine(FlyToDiscardArea());
+    }
     //手牌回合结束剩余进入弃牌堆
     IEnumerator FlyToDiscardArea()
     {
@@ -451,6 +467,7 @@ public class BattleField : MonoSingleton<BattleField>
             gameState = GameState.敌方回合;
             stateChangeEvent.Invoke();
             yield return new WaitWhile(() => Skills.Instance.isBooming = false);
+
             for(int i=0;i<monsterInBattle.Count;i++)
             {
                 yield return new WaitWhile(() => Skills.Instance.isBooming = false);
@@ -511,6 +528,7 @@ public class BattleField : MonoSingleton<BattleField>
                     if (thismonster.isBesideRecover) Skills.Instance.RecoverBesides(thismonster.block, 10);
                     if (thismonster.isBesideArmored) Skills.Instance.ArmoredBesides(thismonster.block, 10);
                     if (thismonster.isSelfArmored)   Skills.Instance.ArmoredSelf(thismonster, thismonster.selfArmoredValue);
+                    if (thismonster.isSummonMonster) SummonRandomPos(33);
                     yield return new WaitForSeconds(0.2f);
                 }
 
@@ -770,6 +788,39 @@ public class BattleField : MonoSingleton<BattleField>
         yield return new WaitForSeconds(0.2f);
         //monster.GetComponent<ThisMonster>().multipleAttacks = multipleAttacks;
         //monster.GetComponent<ThisMonster>().multipleAwards = multipleAwards;
+    }
+    public void SummonRandomPos(int id)
+    {
+        if (monsterInBattle.Count < 6)
+        {
+            AudioManager.Instance.summonMonster.Play();
+            Transform thisBlock;
+            int number;
+            do
+            {
+                number = Random.Range(0, 5);
+            } while (blocks[number].transform.childCount > 1);
+            thisBlock = blocks[number].transform;
+            
+            GameObject newCard = GameObject.Instantiate(monsterCardPrefab, thisBlock);
+            newCard.GetComponent<ThisMonsterCard>().card = cardData.CopyMonsterCard(id);
+            thisBlock.GetComponent<Blocks>().card = newCard;
+            newCard.transform.localScale=Vector3.zero;
+            newCard.GetComponent<MouseInteraction>().enabled = false;
+            
+            GameObject monster = Instantiate(monstersPrefab.transform.GetChild(id), thisBlock).gameObject;
+            
+            monster.GetComponent<ThisMonster>().monsterCard = newCard;
+            //monster.GetComponent<ThisMonster>().OnStart();
+            monsterInBattle.Add(monster);
+            
+            Debug.Log("summon");
+            waitingMonster = null;
+            monstersCounter++;
+            summonEvent.Invoke();
+            monsterChange.Invoke();
+        }
+        
     }
     
     public void UseEquipment(GameObject monster,GameObject equipment)

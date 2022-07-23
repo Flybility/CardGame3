@@ -78,11 +78,11 @@ public class PlayerData : MonoSingleton<PlayerData>
         currentHealth = maxHealth;
         HealthBarChange();
 
-        playerMonsterCards.Add(cardData.CopyMonsterCard(3));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(32));
         playerMonsterCards.Add(cardData.CopyMonsterCard(8));
         playerMonsterCards.Add(cardData.CopyMonsterCard(38));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(30));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(5));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(32));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(33));
         playerMonsterCards.Add(cardData.CopyMonsterCard(5));
         playerMonsterCards.Add(cardData.CopyMonsterCard(6));
         playerMonsterCards.Add(cardData.CopyMonsterCard(7));
@@ -110,7 +110,7 @@ public class PlayerData : MonoSingleton<PlayerData>
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(4));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(5));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(8));
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(15));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(16));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(18));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(30));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(31));

@@ -78,6 +78,9 @@ public class ThisMonster : MonoBehaviour
     public bool isRoundExchangeBeside;
     public bool isRoundExchangeInterval;
     public bool isRoundSwallowBeside;
+    public bool isAttackPlusbyAmount;
+    public int attackPlusRate;
+    public int plusAttack;
     void Start()
     {
         OnStart();
@@ -171,6 +174,12 @@ public class ThisMonster : MonoBehaviour
     {
         neighbours = BlocksManager.Instance.GetNeighbours(block.transform);
         intervals = BlocksManager.Instance.GetInterval(block.transform);
+        if (isAttackPlusbyAmount&&attackPlusRate>0)
+        {
+            plusAttack = attackPlusRate * (BattleField.Instance.monsterInBattle.Count - 1);
+            currentAttacks = attacks + plusAttack;
+        }
+        
 
 
         isBesideAward = CheckNeighbourAward();
