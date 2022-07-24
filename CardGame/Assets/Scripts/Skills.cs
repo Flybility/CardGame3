@@ -166,7 +166,7 @@ public class Skills : MonoSingleton<Skills>
         isBooming = true;
         if (BattleField.Instance.isFinished == false)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
             AudioManager.Instance.boom1.Play();
             List<GameObject> monsters = new List<GameObject>();
             foreach (var monster in BlocksManager.Instance.monsters)
@@ -186,7 +186,7 @@ public class Skills : MonoSingleton<Skills>
             yield return new WaitForSeconds(0.1f);
             for (int i = 0; i < monsters.Count; i++)
             {
-                yield return new WaitForSeconds(0.06f);
+                yield return new WaitForSeconds(0.03f);
                 AttackMonster(damage, monsters[i],false);
                 Instantiate(boomEffect, monsters[i].transform.parent);
                 if (monsters[i].GetComponent<ThisMonster>().isAddAlcohol)
