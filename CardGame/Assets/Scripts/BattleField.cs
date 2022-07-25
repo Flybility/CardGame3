@@ -312,7 +312,17 @@ public class BattleField : MonoSingleton<BattleField>
     //判断抽牌堆卡牌数量，若少则从弃牌堆洗牌进入抽牌堆，若足则从抽牌堆抽取卡牌
     public void DrawHandMonster()
     {
-        PanelMask.SetActive(true);
+        for (int i = 0; i < monsterInBattle.Count; i++)
+        {
+            MonsterBase monsterBase = monsterInBattle[i].GetComponent<MonsterBase>();
+            if(monsterBase != null)
+            {
+                monsterBase.PlayerRound_Begin();
+            }
+        }
+
+
+            PanelMask.SetActive(true);
         if (extractArea.childCount >= PlayerData.Instance.currentCardMax+ PlayerData.Instance.tempExtraCardMax)
         {
             StartFlyToHand();
@@ -327,9 +337,17 @@ public class BattleField : MonoSingleton<BattleField>
 
     }
     //开启FlyToHand协程
-    public void StartFlyToHand()
+    public void StartFlyToHand(int count = -1)
     {
-        StartCoroutine(FlyToHand(PlayerData.Instance.currentCardMax + PlayerData.Instance.tempExtraCardMax));
+        if (count == -1)
+        {
+            StartCoroutine(FlyToHand(PlayerData.Instance.currentCardMax + PlayerData.Instance.tempExtraCardMax));
+        }
+        else
+        {
+            StartCoroutine(FlyToHand(count));
+        }
+        
     }
     //玩家开始攻击
     
@@ -468,7 +486,16 @@ public class BattleField : MonoSingleton<BattleField>
             stateChangeEvent.Invoke();
             yield return new WaitWhile(() => Skills.Instance.isBooming = false);
 
-            for(int i=0;i<monsterInBattle.Count;i++)
+            for (int i = 0; i < monsterInBattle.Count; i++)
+            {
+                ThisMonster thismonster = monsterInBattle[i].GetComponent<ThisMonster>();
+                if (thismonster.dizzyCount < 1 && thismonster.monsterBase != null)
+                {
+                    thismonster.monsterBase.MonsterRound_Begin();
+                }
+            }
+
+            for (int i=0;i<monsterInBattle.Count;i++)
             {
                 yield return new WaitWhile(() => Skills.Instance.isBooming = false);
                 ThisMonster thismonster = monsterInBattle[i].GetComponent<ThisMonster>();

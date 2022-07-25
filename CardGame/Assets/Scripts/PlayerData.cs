@@ -22,6 +22,7 @@ public class PlayerData : MonoSingleton<PlayerData>
     public List<MonsterCard> playerMonsterCards = new List<MonsterCard>();
 
     public Slider slider;
+
     //基础状态
     public int maxEquipmentAmount;
     public int maxHealth;
@@ -78,14 +79,24 @@ public class PlayerData : MonoSingleton<PlayerData>
         currentHealth = maxHealth;
         HealthBarChange();
 
-        playerMonsterCards.Add(cardData.CopyMonsterCard(32));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(8));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(38));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(32));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(33));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(5));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(6));
-        playerMonsterCards.Add(cardData.CopyMonsterCard(7));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(0));
+        //playerMonsterCards.Add(cardData.CopyMonsterCard(8));
+        //playerMonsterCards.Add(cardData.CopyMonsterCard(38));
+        //playerMonsterCards.Add(cardData.CopyMonsterCard(32));
+        //playerMonsterCards.Add(cardData.CopyMonsterCard(33));
+        //playerMonsterCards.Add(cardData.CopyMonsterCard(5));
+        //playerMonsterCards.Add(cardData.CopyMonsterCard(6));
+        //playerMonsterCards.Add(cardData.CopyMonsterCard(7));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(15));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(16));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(28));
@@ -101,8 +112,9 @@ public class PlayerData : MonoSingleton<PlayerData>
         //playerMonsterCards.Add(cardData.CopyMonsterCard(15));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(21));
         //playerMonsterCards.Add(cardData.CopyMonsterCard(22));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(23));
-        //playerMonsterCards.Add(cardData.CopyMonsterCard(23));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(39));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(31));
+        playerMonsterCards.Add(cardData.CopyMonsterCard(37));
 
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(0));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(1));
@@ -444,7 +456,6 @@ public class PlayerData : MonoSingleton<PlayerData>
     }
     public void HealthBarChange()
     {
-        Debug.Log("生命值改变");
         slider.value = (float)currentHealth / (maxHealth+extraMaxHealth);
         healthText.text = currentHealth + "/" + (maxHealth + extraMaxHealth);
     }

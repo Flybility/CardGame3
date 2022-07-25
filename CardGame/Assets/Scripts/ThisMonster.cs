@@ -9,6 +9,7 @@ using System;
 
 public class ThisMonster : MonoBehaviour
 {
+    public MonsterBase monsterBase;
     public GameObject monsterCard;
     public Transform block;
     public Vector3 initialStateBlock;
@@ -141,6 +142,7 @@ public class ThisMonster : MonoBehaviour
         block = transform.parent;
         //effect = gameObject.GetComponent(Type.GetType("Monster" + id));
         BattleField.Instance.MonsterRoundEnd.AddListener(StartPerRoundChange);
+        monsterBase = GetComponent<MonsterBase>();
     }
 
     public bool CheckNeighbourAward()
