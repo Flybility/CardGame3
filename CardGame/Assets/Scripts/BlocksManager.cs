@@ -18,6 +18,10 @@ public class BlocksManager : MonoSingleton<BlocksManager>
     {
         
     }
+    public void BlockTrigger(Transform block)
+    {
+
+    }
     public void MonsterChange()
     {
         for (int i = 0; i < transform.childCount; i++)

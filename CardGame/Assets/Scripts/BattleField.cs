@@ -799,7 +799,7 @@ public class BattleField : MonoSingleton<BattleField>
             do
             {
                 number = Random.Range(0, 5);
-            } while (blocks[number].transform.childCount > 1);
+            } while (blocks[number].transform.childCount >2);
             thisBlock = blocks[number].transform;
             
             GameObject newCard = GameObject.Instantiate(monsterCardPrefab, thisBlock);

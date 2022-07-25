@@ -30,6 +30,7 @@ public class Skills : MonoSingleton<Skills>
     public GameObject intangibleCounter;
 
     public UnityEvent reverse = new UnityEvent();
+    public MyGameObjectEvent blockTrigger = new MyGameObjectEvent();
     // Start is called before the first frame update
     public void AttackPlayer(int damage,ThisMonster monster)
     {
@@ -262,6 +263,10 @@ public class Skills : MonoSingleton<Skills>
     public void AddAttackCount(ThisMonster monster)
     {
         monster.AddAttack(0, attackCounter);
+    }
+    public void AddBlockState_1(GameObject block)
+    {
+        blockTrigger.Invoke(block);
     }
     //属性被动装备
     public void StaticAngerCount(int times,int threshold)
