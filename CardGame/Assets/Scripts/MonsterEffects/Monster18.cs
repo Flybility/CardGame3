@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster18 : MonoBehaviour
+public class Monster18 : MonsterBase
 {
-    public ThisMonster monster;
-    public int attackAttachedScareCount;//攻击附加恐惧层数
+    //public int attackAttachedScareCount;//攻击附加恐惧层数
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         monster = GetComponent<ThisMonster>();
         Instantiate(Skills.Instance.intangibleCounter, monster.stateBlock);
-        monster.attackAttachedScare = attackAttachedScareCount;
+        //monster.attackAttachedScare = attackAttachedScareCount;
         monster.isIntangible = true;
         monster.isAddAward = true;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void MonsterAttack_add()
     {
-        
+        PlayerData.Instance.AddScareCount(1, Skills.Instance.scareCounter);
     }
 }

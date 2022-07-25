@@ -71,17 +71,18 @@ public class ThisMonster : MonoBehaviour
     public bool isBesideAward;
     public bool isIntervalAttack;
     public bool isBesideAttack;
-    public bool isBesideRecover;
+    //public bool isBesideRecover;
     public bool isSummonMonster;
-    public bool isSelfArmored;
+    //public bool isSelfArmored;
     public int selfArmoredValue;
-    public bool isBesideArmored;
+    //public bool isBesideArmored;
     public bool isRoundExchangeBeside;
     public bool isRoundExchangeInterval;
     public bool isRoundSwallowBeside;
     public bool isAttackPlusbyAmount;
     public int attackPlusRate;
     public int plusAttack;
+    public bool isAttakMultiByAmount;
     void Start()
     {
         OnStart();
@@ -181,7 +182,12 @@ public class ThisMonster : MonoBehaviour
             plusAttack = attackPlusRate * (BattleField.Instance.monsterInBattle.Count - 1);
             currentAttacks = attacks + plusAttack;
         }
-        
+        if (isAttakMultiByAmount)
+        {
+            currentAttacks = attacks * (BattleField.Instance.monsterInBattle.Count);
+             
+        }
+
 
 
         isBesideAward = CheckNeighbourAward();

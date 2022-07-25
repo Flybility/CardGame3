@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class Monster37 : MonsterBase
 {
-    [Range(0, 1)] public float drawCardProbability;
 
-    public override void MonsterRound_Begin()
+   
+    public override void MonsterChangePosition_Over(Transform block)
     {
-        float random = Random.Range(0f, 1f);
-        if(random < drawCardProbability)
+        if (BattleField.Instance.gameState == GameState.玩家回合)
         {
             BattleField.Instance.StartFlyToHand(1);
-            monster.isRoundExchangeBeside = false;
         }
-        else
-        {
-            monster.isRoundExchangeBeside = true;
-        }
+
     }
 }

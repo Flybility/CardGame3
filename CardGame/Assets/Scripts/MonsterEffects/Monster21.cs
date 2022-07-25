@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster21 : MonoBehaviour
+public class Monster21 : MonsterBase
 {
-    public ThisMonster monster;
-    public int attackAttachedBondage;
     // Start is called before the first frame update
     //死亡时增加下次攻击力
-    void Start()
+    public override void Start()
     {
         monster = GetComponent<ThisMonster>();
-        monster.attackAttachedBondages = attackAttachedBondage;
         monster.isAddAward = true;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void MonsterAttack_add()
     {
-        
+        PlayerData.Instance.AddBondages(1, Skills.Instance.bondageCounter);
     }
 }

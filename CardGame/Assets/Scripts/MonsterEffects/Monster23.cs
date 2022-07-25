@@ -2,20 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster23 : MonoBehaviour
+public class Monster23 : MonsterBase
 {
-    public ThisMonster monster;
-    // Start is called before the first frame update
-    void Start()
+    public override void MonsterRound_Begin()
     {
-        monster = GetComponent<ThisMonster>();
-        monster.isBesideRecover = true;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Skills.Instance.RecoverBesides(monster.block, 10);
     }
 }

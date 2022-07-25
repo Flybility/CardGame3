@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster20 : MonoBehaviour
+public class Monster20 : MonsterBase
 {
-    public ThisMonster monster;
-    public int attackAttachedBurns;
     // Start is called before the first frame update
     //死亡时增加下次攻击力
-    void Start()
+    public override void Start()
     {
         monster = GetComponent<ThisMonster>();
-        monster.attackAttachedBurns = attackAttachedBurns;
+       
         monster.isAddAward = true;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void MonsterAttack_add()
     {
-        
+        PlayerData.Instance.AddBurns(2, Skills.Instance.burnsCounter);
     }
 }

@@ -2,18 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster27 : MonoBehaviour
+public class Monster27 : MonsterBase
 {
-    public ThisMonster monster;
-    // Start is called before the first frame update
-    void Start()
+    public override void MonsterAttack_end()
     {
-        monster = GetComponent<ThisMonster>();
-        monster.isRoundExchangeInterval = true;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Skills.Instance.StartExchangeIntervalPosition(monster.gameObject);
     }
 }

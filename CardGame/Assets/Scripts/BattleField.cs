@@ -539,12 +539,18 @@ public class BattleField : MonoSingleton<BattleField>
                     yield return new WaitForSeconds(0.05f);
                     Skills.Instance.AttackPlayer(monsterInBattle[i].GetComponent<ThisMonster>().afterMultipleAttacks, monsterInBattle[i].GetComponent<ThisMonster>());
                     yield return new WaitForSeconds(0.25f);
-                    if (thismonster.isRoundExchangeBeside)
+
+                    MonsterBase monsterBase = monsterInBattle[i].GetComponent<MonsterBase>();
+                    if (monsterBase != null)
                     {
-                        yield return new WaitForSeconds(0.3f);
-                        Skills.Instance.StartExchangeBesidePosition(monsterInBattle[i]);
-                        yield return new WaitForSeconds(0.4f);
+                        monsterBase.MonsterAttack_end();
                     }
+                    //if (thismonster.isRoundExchangeBeside)
+                    //{
+                    //    yield return new WaitForSeconds(0.3f);
+                    //    Skills.Instance.StartExchangeBesidePosition(monsterInBattle[i]);
+                    //    yield return new WaitForSeconds(0.4f);
+                    //}
                     if (thismonster.isRoundExchangeInterval)
                     {
                         yield return new WaitForSeconds(0.3f);
@@ -552,9 +558,9 @@ public class BattleField : MonoSingleton<BattleField>
                         yield return new WaitForSeconds(0.4f);
                     }
                     yield return new WaitForSeconds(0.3f);
-                    if (thismonster.isBesideRecover) Skills.Instance.RecoverBesides(thismonster.block, 10);
-                    if (thismonster.isBesideArmored) Skills.Instance.ArmoredBesides(thismonster.block, 10);
-                    if (thismonster.isSelfArmored)   Skills.Instance.ArmoredSelf(thismonster, thismonster.selfArmoredValue);
+                    //if (thismonster.isBesideRecover) 
+                    //if (thismonster.isBesideArmored) Skills.Instance.ArmoredBesides(thismonster.block, 10);
+                    //if (thismonster.isSelfArmored)   Skills.Instance.ArmoredSelf(thismonster, thismonster.selfArmoredValue);
                     if (thismonster.isSummonMonster) SummonRandomPos(33);
                     yield return new WaitForSeconds(0.2f);
                 }
@@ -812,7 +818,11 @@ public class BattleField : MonoSingleton<BattleField>
         summonEvent.Invoke();
         monsterChange.Invoke();
 
+       
+
         yield return new WaitForSeconds(0.2f);
+        if (monster.GetComponent<ThisMonster>().monsterBase != null)
+             monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(_block);
         //monster.GetComponent<ThisMonster>().multipleAttacks = multipleAttacks;
         //monster.GetComponent<ThisMonster>().multipleAwards = multipleAwards;
     }
@@ -938,12 +948,7 @@ public class BattleField : MonoSingleton<BattleField>
             monsterCard.transform.SetParent(discardArea);
             monsterCard.transform.localPosition = Vector3.zero;
         }
-        if (monster.GetComponent<ThisMonster>().isBoom)
-        {
-            monster.transform.DOScale(transform.localScale * 1.3f, 0.4f);
-            monster.GetComponent<ThisMonster>().image.DOColor(Color.HSVToRGB(1,1f,0.8f), 0.4f);
-            yield return new WaitForSeconds(0.4f);
-        }
+       
         Destroy(monster);
         Debug.Log("怪物死亡");
         AudioManager.Instance.monsterDead1.Play();

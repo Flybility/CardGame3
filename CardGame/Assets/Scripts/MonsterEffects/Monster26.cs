@@ -2,23 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster26 : MonoBehaviour
+public class Monster26 : MonsterBase
 {
-    public ThisMonster monster;
-    public int armorValue;
-    // Start is called before the first frame update
-    void Start()
+    public override void MonsterRound_Begin()
     {
-        monster = GetComponent<ThisMonster>();
-        monster.isSelfArmored = true;
-        monster.isRoundExchangeBeside = true;
-        monster.selfArmoredValue = armorValue;
-        //Skills.Instance.ArmoredSelf(monster, armorValue);
+        Skills.Instance.ArmoredSelf(monster, 20);
+        Skills.Instance.StartExchangeBesidePosition(monster.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

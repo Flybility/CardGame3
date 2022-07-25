@@ -2,20 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster24 : MonoBehaviour
+public class Monster24 : MonsterBase
 {
-    public ThisMonster monster;
-    // Start is called before the first frame update
-    void Start()
+    public override void MonsterRound_Begin()
     {
-        monster = GetComponent<ThisMonster>();
-        monster.isBesideArmored = true;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Skills.Instance.ArmoredBesides(monster.block, 20);
     }
 }

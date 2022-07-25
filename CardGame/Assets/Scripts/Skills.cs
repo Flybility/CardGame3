@@ -35,18 +35,24 @@ public class Skills : MonoSingleton<Skills>
     {
         PlayerData.Instance.HealthDecrease(damage);
         Instantiate(attackEffect, PlayerData.Instance.transform);
-        if (monster.isAddScareCount)
+
+        if (monster.monsterBase != null)
         {
-            PlayerData.Instance.AddScareCount(BattleField.Instance.monsterInBattle.Count, scareCounter);
+            monster.monsterBase.MonsterAttack_add();
         }
-        else { PlayerData.Instance.AddScareCount(monster.attackAttachedScare, scareCounter); }
-        if (monster.isAddBurnsCount)
-        {
-            PlayerData.Instance.AddBurns(BattleField.Instance.monsterInBattle.Count, burnsCounter);
-        }
-        else { PlayerData.Instance.AddBurns(monster.attackAttachedBurns, scareCounter); }
-        PlayerData.Instance.AddBondages(monster.attackAttachedBondages, bondageCounter);
-        PlayerData.Instance.gameObject.transform.DOPunchPosition(new Vector3(-40, 0, 0), 0.3f, 3, 1);
+
+        //if (monster.isAddScareCount)
+        //{
+        //    PlayerData.Instance.AddScareCount(BattleField.Instance.monsterInBattle.Count, scareCounter);
+        //}
+        //else { PlayerData.Instance.AddScareCount(monster.attackAttachedScare, scareCounter); }
+        //if (monster.isAddBurnsCount)
+        //{
+        //    PlayerData.Instance.AddBurns(BattleField.Instance.monsterInBattle.Count, burnsCounter);
+        //}
+        //else { PlayerData.Instance.AddBurns(monster.attackAttachedBurns, scareCounter); }
+        //PlayerData.Instance.AddBondages(monster.attackAttachedBondages, bondageCounter);
+        //PlayerData.Instance.gameObject.transform.DOPunchPosition(new Vector3(-40, 0, 0), 0.3f, 3, 1);
 
     }
     public void AttackMonster(int damage, GameObject target,bool isStraight)
@@ -128,6 +134,9 @@ public class Skills : MonoSingleton<Skills>
     IEnumerator BoomBeside(ThisMonster thisMonster, int damage)
     {
         isBooming = true;
+        thisMonster.transform.DOScale(transform.localScale * 1.3f, 0.4f);
+        thisMonster.gameObject.GetComponent<ThisMonster>().image.DOColor(Color.HSVToRGB(1, 1f, 0.8f), 0.4f);
+        yield return new WaitForSeconds(0.4f);
         if (BattleField.Instance.isFinished == false)
         {
             
@@ -353,32 +362,38 @@ public class Skills : MonoSingleton<Skills>
     }
     IEnumerator ExchangeMonsterGiven(GameObject monster1,GameObject monster2)
     {
-        GameObject monsterCard1 = monster1.GetComponent<ThisMonster>().monsterCard;
-        GameObject monsterCard2 = monster2.GetComponent<ThisMonster>().monsterCard;
-        Transform block1 = monster1.GetComponent<ThisMonster>().block;
-        Transform block2 = monster2.GetComponent<ThisMonster>().block;
+        ThisMonster thisMonster1 = monster1.GetComponent<ThisMonster>();
+        ThisMonster thisMonster2 = monster2.GetComponent<ThisMonster>();
+        GameObject monsterCard1 = thisMonster1.monsterCard;
+        GameObject monsterCard2 = thisMonster2.monsterCard;
+        Transform block1 = thisMonster1.block;
+        Transform block2 = thisMonster2.block;
 
-        GameObject nextMonsterCard = monster2.GetComponent<ThisMonster>().monsterCard;
+       // GameObject nextMonsterCard = thisMonster2.monsterCard;
         //
         yield return new WaitForSeconds(0.05f);
 
         AudioManager.Instance.Exchange.Play();
 
-        nextMonsterCard.transform.SetParent(block1);
+        monsterCard2.transform.SetParent(block1);
         monster2.transform.SetParent(block1);
-        
-        monster2.GetComponent<ThisMonster>().block = block1;
+
+        thisMonster2.block = block1;
 
 
         monsterCard1.transform.SetParent(block2);
         monster1.transform.SetParent(block2);
-        
-        monster1.GetComponent<ThisMonster>().block = block2;
+
+        thisMonster1.block = block2;
 
         monster2.transform.DOLocalMove(Vector3.zero, 0.3f);
         monster1.transform.DOLocalMove(Vector3.zero, 0.3f);
 
         BlocksManager.Instance.MonsterChange();
+        if (thisMonster1.monsterBase != null)
+            thisMonster1.monsterBase.MonsterChangePosition_Over(block2);
+        if (thisMonster2.monsterBase != null)
+            thisMonster2.monsterBase.MonsterChangePosition_Over(block1);
     }
     public void StartTransformMonsterGivenToBlock(GameObject monster1,Transform block)
     {
@@ -397,6 +412,8 @@ public class Skills : MonoSingleton<Skills>
         monster.transform.DOLocalMove(Vector3.zero, 0.3f);
 
         BlocksManager.Instance.MonsterChange();
+        if (monster.GetComponent<ThisMonster>().monsterBase != null)
+            monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
        
     }
     IEnumerator ExchangeBesidePosition(GameObject monster)
@@ -431,6 +448,10 @@ public class Skills : MonoSingleton<Skills>
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
 
             BlocksManager.Instance.MonsterChange();
+            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
+            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null)
+                nextMonster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(block);
         }
         else 
         {
@@ -444,6 +465,8 @@ public class Skills : MonoSingleton<Skills>
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
 
             BlocksManager.Instance.MonsterChange();
+            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
         }
 
     }
@@ -478,6 +501,10 @@ public class Skills : MonoSingleton<Skills>
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
 
             BlocksManager.Instance.MonsterChange();
+            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextblock);
+            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null)
+                nextMonster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(block);
         }
         else
         {
@@ -491,6 +518,8 @@ public class Skills : MonoSingleton<Skills>
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
 
             BlocksManager.Instance.MonsterChange();
+            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
         }
 
     }
@@ -547,6 +576,8 @@ public class Skills : MonoSingleton<Skills>
                 AudioManager.Instance.swallow.Play();
 
                 BlocksManager.Instance.MonsterChange();
+                if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
                 yield return new WaitForSeconds(0.3f);
                 reverse.Invoke();
                 yield break;
@@ -580,9 +611,11 @@ public class Skills : MonoSingleton<Skills>
                 // monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
                 monster.GetComponent<ThisMonster>().block = nextBlock;
                 monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-              
+                
 
                 BlocksManager.Instance.MonsterChange();
+                if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
                 yield return new WaitForSeconds(0.3f);
                 reverse.Invoke();
             }
@@ -603,6 +636,8 @@ public class Skills : MonoSingleton<Skills>
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
             
             BlocksManager.Instance.MonsterChange();
+            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
             yield return new WaitForSeconds(0.3f);
             reverse.Invoke();
         }
@@ -644,6 +679,9 @@ public class Skills : MonoSingleton<Skills>
 
                 
                 BlocksManager.Instance.MonsterChange();
+                if(monster.GetComponent<ThisMonster>().monsterBase!=null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
+
                 yield return new WaitForSeconds(0.3f);
                 reverse.Invoke();
                 yield break;
@@ -696,6 +734,8 @@ public class Skills : MonoSingleton<Skills>
 
 
                 BlocksManager.Instance.MonsterChange();
+                if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
                 yield return new WaitForSeconds(0.3f);
                 reverse.Invoke();
             }
@@ -716,6 +756,8 @@ public class Skills : MonoSingleton<Skills>
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
             
             BlocksManager.Instance.MonsterChange();
+            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
             yield return new WaitForSeconds(0.3f);
             reverse.Invoke();
         }

@@ -471,6 +471,7 @@ MonoBehaviour:
   AddToHand:
     m_PersistentCalls:
       m_Calls: []
+  chosenMonster: {fileID: 0}
 --- !u!114 &92567077 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 805174874989761283, guid: c7cc8f1b6019bec43beffee6fbf3d52b, type: 3}
@@ -4883,7 +4884,7 @@ MonoBehaviour:
   initialAttacks: 20
   currentAttacks: 0
   tempAttaks: 0
-  monsterCardMaxCount: 5
+  monsterCardMaxCount: 4
   currentCardMax: 0
   tempExtraCardMax: 0
   isAttackBesides: 0

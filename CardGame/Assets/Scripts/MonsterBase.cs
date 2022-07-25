@@ -27,14 +27,20 @@ public class MonsterBase : MonoBehaviour
     {
 
     }
+    public virtual void MonsterAttack_add()
+    {
 
+    }
+    public virtual void MonsterAttack_end()
+    {
 
+    }
     public virtual void MonsterChangePosition_Begin()
     {
 
     }
 
-    public virtual void MonsterChangePosition_Ovrt()
+    public virtual void MonsterChangePosition_Over(Transform block)
     {
 
     }
