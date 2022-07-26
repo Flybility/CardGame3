@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster11 : MonoBehaviour
+public class Monster11 : MonsterBase
 {
-    public ThisMonster monster;
+    
     public int value;
     // Start is called before the first frame update
     //死亡时增加下次手牌抽取量
-    void Start()
+    public override void Start()
     {
         monster = GetComponent<ThisMonster>();
         value = 2;

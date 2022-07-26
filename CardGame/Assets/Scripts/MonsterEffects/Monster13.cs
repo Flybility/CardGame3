@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster13 : MonoBehaviour
+public class Monster13 : MonsterBase
 {
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        monster = GetComponent<ThisMonster>();
         PlayerData.Instance.extraPerRoundHealthDecrease = -PlayerData.Instance.perRoundHealthDecrease;
     }
 

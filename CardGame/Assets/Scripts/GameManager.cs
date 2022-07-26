@@ -42,6 +42,7 @@ public class GameManager : MonoSingleton<GameManager>
         //openEquipmentCard.SetActive(true);
         openMonsterCard.SetActive(true);
         OpenPackage.Instance.OpenMonsterCard(PlayerData.Instance.awardMonsterCardAmount);
+        PlayerData.Instance.awardMonsterCardAmount = 5;
     }
     public void StartBattle()
     {

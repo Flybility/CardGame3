@@ -173,7 +173,7 @@ public class MouseInteraction : MonoBehaviour,IPointerEnterHandler,IPointerExitH
             //选完怪物卡选装备卡
             GameManager.Instance.openEquipmentCard.SetActive(true);
             OpenPackage.Instance.OpenEquiptmentCard(PlayerData.Instance.awardEquipCardAmount);
-           
+            PlayerData.Instance.awardEquipCardAmount = 3;
         }
         if (isInOpenEquipmentPool&&eventData.button == PointerEventData.InputButton.Left)
         {

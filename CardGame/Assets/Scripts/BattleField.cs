@@ -497,7 +497,7 @@ public class BattleField : MonoSingleton<BattleField>
 
             for (int i=0;i<monsterInBattle.Count;i++)
             {
-                yield return new WaitWhile(() => Skills.Instance.isBooming = false);
+                //yield return new WaitWhile(() => Skills.Instance.isBooming = false);
                 ThisMonster thismonster = monsterInBattle[i].GetComponent<ThisMonster>();
                 if (thismonster.dizzyCount > 0)
                 {
@@ -530,7 +530,11 @@ public class BattleField : MonoSingleton<BattleField>
                         yield return new WaitForSeconds(0.3f);
                     }
                     yield return new WaitForSeconds(0.2f);
-                    monsterInBattle[i].transform.DOPunchPosition(targetPos - monsterPos, 0.5f, 1);
+                    if (i >= 0&&i< monsterInBattle.Count)
+                    {
+                        monsterInBattle[i].transform.DOPunchPosition(targetPos - monsterPos, 0.5f, 1);
+                    }                 
+                   
                     yield return new WaitForSeconds(0.20f);
 
 
@@ -538,7 +542,7 @@ public class BattleField : MonoSingleton<BattleField>
                     AudioManager.Instance.monsterAttack.Play();
                     yield return new WaitForSeconds(0.05f);
                     Skills.Instance.AttackPlayer(monsterInBattle[i].GetComponent<ThisMonster>().afterMultipleAttacks, monsterInBattle[i].GetComponent<ThisMonster>());
-                    yield return new WaitForSeconds(0.25f);
+                    yield return new WaitForSeconds(0.4f);
 
                     MonsterBase monsterBase = monsterInBattle[i].GetComponent<MonsterBase>();
                     if (monsterBase != null)
@@ -551,18 +555,18 @@ public class BattleField : MonoSingleton<BattleField>
                     //    Skills.Instance.StartExchangeBesidePosition(monsterInBattle[i]);
                     //    yield return new WaitForSeconds(0.4f);
                     //}
-                    if (thismonster.isRoundExchangeInterval)
-                    {
-                        yield return new WaitForSeconds(0.3f);
-                        Skills.Instance.StartExchangeIntervalPosition(monsterInBattle[i]);
-                        yield return new WaitForSeconds(0.4f);
-                    }
-                    yield return new WaitForSeconds(0.3f);
+                    //if (thismonster.isRoundExchangeInterval)
+                    //{
+                    //    yield return new WaitForSeconds(0.3f);
+                    //    Skills.Instance.StartExchangeIntervalPosition(monsterInBattle[i]);
+                    //    yield return new WaitForSeconds(0.4f);
+                    //}
+                    yield return new WaitForSeconds(0.8f);
                     //if (thismonster.isBesideRecover) 
                     //if (thismonster.isBesideArmored) Skills.Instance.ArmoredBesides(thismonster.block, 10);
                     //if (thismonster.isSelfArmored)   Skills.Instance.ArmoredSelf(thismonster, thismonster.selfArmoredValue);
-                    if (thismonster.isSummonMonster) SummonRandomPos(33);
-                    yield return new WaitForSeconds(0.2f);
+                    //if (thismonster.isSummonMonster) SummonRandomPos(33);
+
                 }
 
                 //Skills.Instance.Attack(monster.GetComponent<ThisMonster>().damage, player);
@@ -598,16 +602,14 @@ public class BattleField : MonoSingleton<BattleField>
                 yield return new WaitForSeconds(0.05f);
                 //monster.GetComponent<ThisMonster>().HealthDecrease(PlayerData.Instance.attacks);
                 Skills.Instance.AttackMonster(PlayerData.Instance.currentAttacks, monster,true);
-                PlayerData.Instance.tempAttaks = 0;
+                
                 yield return new WaitForSeconds(0.3f);
                 //monsterChange.Invoke();
             }
-            else
-            {
-                break;
-            }
+            
                 
         }
+        PlayerData.Instance.tempAttaks = 0;
         PlayerData.Instance.DecreaseAttackBesides();
         PlayerData.Instance.DecreaseAttackInterval();
         player.transform.DOLocalMove(playerPos, 0.3f);
@@ -860,6 +862,33 @@ public class BattleField : MonoSingleton<BattleField>
         
     }
     
+    public void SummonTargetBlock(int id,Transform thisBlock)
+    {
+        if (monsterInBattle.Count < 6)
+        {
+            AudioManager.Instance.summonMonster.Play();
+            
+            
+            GameObject newCard = GameObject.Instantiate(monsterCardPrefab, thisBlock);
+            newCard.GetComponent<ThisMonsterCard>().card = cardData.CopyMonsterCard(id);
+            thisBlock.GetComponent<Blocks>().card = newCard;
+            newCard.transform.localScale=Vector3.zero;
+            newCard.GetComponent<MouseInteraction>().enabled = false;
+            
+            GameObject monster = Instantiate(monstersPrefab.transform.GetChild(id), thisBlock).gameObject;
+            
+            monster.GetComponent<ThisMonster>().monsterCard = newCard;
+            //monster.GetComponent<ThisMonster>().OnStart();
+            monsterInBattle.Add(monster);
+            
+            Debug.Log("summon");
+            waitingMonster = null;
+            monstersCounter++;
+            summonEvent.Invoke();
+            monsterChange.Invoke();
+        }
+        
+    }
     public void UseEquipment(GameObject monster,GameObject equipment)
     {
         DestroyArrow();

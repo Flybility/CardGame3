@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Monster15 : MonoBehaviour
+public class Monster15 : MonsterBase
 {
-    public ThisMonster monster;
+    
     public int rounds;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         monster = GetComponent<ThisMonster>();
         AbsorbDamages();

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Monster36 : MonoBehaviour
+public class Monster36 : MonsterBase
 {
-    public ThisMonster monster;
+    
     public int burnsCount;
     // Start is called before the first frame update
-    void Start()//怪物上场时调用技能函数
+    public override void Start()//怪物上场时调用技能函数
     {
         monster = GetComponent<ThisMonster>();
         // GameObject boomCounter = Instantiate(Skills.Instance.boomCounter, monster.stateBlock);

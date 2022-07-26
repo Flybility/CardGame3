@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster14 : MonoBehaviour
+public class Monster14 : MonsterBase
 {
-    public ThisMonster monster;
-    public int value;
+    
+    //public int value;
     // Start is called before the first frame update
     //死亡时增加下次攻击力
-    void Start()
+    public override void Start()
     {
         monster = GetComponent<ThisMonster>();
     }

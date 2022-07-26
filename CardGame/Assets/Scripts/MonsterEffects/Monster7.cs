@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster7 : MonoBehaviour
+public class Monster7 : MonsterBase
 {
-    public ThisMonster monster;
     public int dizzyDamage;
     public int terrorValue;
     // Start is called before the first frame update
-    void Start()//怪物上场时调用技能函数
+    public override void Start()//怪物上场时调用技能函数
     {
         monster = GetComponent<ThisMonster>();
     }

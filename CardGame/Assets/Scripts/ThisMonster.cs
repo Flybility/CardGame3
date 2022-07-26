@@ -397,13 +397,13 @@ public class ThisMonster : MonoBehaviour
             damage = 0;
         }
         
-        if (armorCount >= damage)
+        if (armorCount >= damage&&isReal==false)
         {
             DecreaseArmor(damage);
             GameObject floatValue = Instantiate(PlayerData.Instance.floatPrefab, this.transform.parent);
             floatValue.GetComponent<Text>().text = "-" + damage.ToString();
         }
-        if(armorCount < damage||isReal)
+        else if(armorCount < damage||isReal)
         {
             int realDamage;
             if (isReal) { realDamage = damage; }
@@ -427,7 +427,7 @@ public class ThisMonster : MonoBehaviour
                 PlayerData.Instance.HealthRecover(currentAwards);
                 BattleField.Instance.StartMonsterDead(this.gameObject, monsterCard);
             }
-            else{ return;}
+            //else{ return;}
         }
     }
     public void HealthRecover(int value)

@@ -422,7 +422,7 @@ MonoBehaviour:
   chosenCardNumber: 0
   currentRound: 0
   perRoundDead: 0
-  playerAttackTime: 1
+  playerAttackTime: 2
   playerExchangeTime: 1
   currentPlayerAttackTime: 0
   currentPlayerExchangeTime: 0
@@ -1648,6 +1648,9 @@ MonoBehaviour:
   canAddAttacks: 0
   multipleAttacks: 0
   multipleAwards: 0
+  thornCount: 0
+  assimilationCount: 0
+  parasiteCount: 0
 --- !u!1001 &330392121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4386,6 +4389,9 @@ MonoBehaviour:
   canAddAttacks: 0
   multipleAttacks: 0
   multipleAwards: 0
+  thornCount: 0
+  assimilationCount: 0
+  parasiteCount: 0
 --- !u!1 &771696622
 GameObject:
   m_ObjectHideFlags: 0
@@ -4884,7 +4890,7 @@ MonoBehaviour:
   initialAttacks: 20
   currentAttacks: 0
   tempAttaks: 0
-  monsterCardMaxCount: 4
+  monsterCardMaxCount: 6
   currentCardMax: 0
   tempExtraCardMax: 0
   isAttackBesides: 0
@@ -5918,6 +5924,9 @@ MonoBehaviour:
   canAddAttacks: 0
   multipleAttacks: 0
   multipleAwards: 0
+  thornCount: 0
+  assimilationCount: 0
+  parasiteCount: 0
 --- !u!1 &1086109366
 GameObject:
   m_ObjectHideFlags: 0
@@ -10496,6 +10505,9 @@ MonoBehaviour:
   canAddAttacks: 0
   multipleAttacks: 0
   multipleAwards: 0
+  thornCount: 0
+  assimilationCount: 0
+  parasiteCount: 0
 --- !u!1 &1843555319
 GameObject:
   m_ObjectHideFlags: 0
@@ -11036,6 +11048,9 @@ MonoBehaviour:
   canAddAttacks: 0
   multipleAttacks: 0
   multipleAwards: 0
+  thornCount: 0
+  assimilationCount: 0
+  parasiteCount: 0
 --- !u!1 &1902385847
 GameObject:
   m_ObjectHideFlags: 0
@@ -11655,6 +11670,9 @@ MonoBehaviour:
   canAddAttacks: 0
   multipleAttacks: 0
   multipleAwards: 0
+  thornCount: 2
+  assimilationCount: 0
+  parasiteCount: 0
 --- !u!1 &1993308522
 GameObject:
   m_ObjectHideFlags: 0

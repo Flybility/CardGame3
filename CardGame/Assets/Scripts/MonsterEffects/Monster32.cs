@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster32 : MonoBehaviour
+public class Monster32 : MonsterBase
 {
-    public ThisMonster monster;
+
     // Start is called before the first frame update
-    void Start()
+    public override void MonsterAttack_end()
     {
         monster = GetComponent<ThisMonster>();
-        monster.isSummonMonster = true;
+        BattleField.Instance.SummonRandomPos(33);
 
     }
 

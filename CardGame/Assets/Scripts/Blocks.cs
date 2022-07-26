@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+
 public class Blocks : MonoBehaviour, IPointerClickHandler
 {
     public GameObject card;
@@ -11,6 +12,10 @@ public class Blocks : MonoBehaviour, IPointerClickHandler
     public bool canAddAttacks;
     public float multipleAttacks;
     public float multipleAwards;
+
+    public int thornCount;//荆棘层数
+    public int assimilationCount;//同化层数
+    public int parasiteCount;//寄生层数
 
     void Start()
     {

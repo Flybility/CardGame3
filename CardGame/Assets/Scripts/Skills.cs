@@ -375,6 +375,10 @@ public class Skills : MonoSingleton<Skills>
 
         AudioManager.Instance.Exchange.Play();
 
+        if (thisMonster1.monsterBase != null)
+            thisMonster1.monsterBase.MonsterChangePosition_Begin(block1);
+        if (thisMonster2.monsterBase != null)
+            thisMonster2.monsterBase.MonsterChangePosition_Begin(block2);
         monsterCard2.transform.SetParent(block1);
         monster2.transform.SetParent(block1);
 
@@ -389,6 +393,7 @@ public class Skills : MonoSingleton<Skills>
         monster2.transform.DOLocalMove(Vector3.zero, 0.3f);
         monster1.transform.DOLocalMove(Vector3.zero, 0.3f);
 
+        yield return new WaitForSeconds(0.3f);
         BlocksManager.Instance.MonsterChange();
         if (thisMonster1.monsterBase != null)
             thisMonster1.monsterBase.MonsterChangePosition_Over(block2);
@@ -402,17 +407,20 @@ public class Skills : MonoSingleton<Skills>
     IEnumerator TransformMonsterGivenToBlock(GameObject monster, Transform nextBlock)
     {
         GameObject monsterCard = monster.GetComponent<ThisMonster>().monsterCard;
+        Transform block = monster.GetComponent<ThisMonster>().block;
         yield return new WaitForSeconds(0.05f);
         AudioManager.Instance.Exchange.Play();
+        if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+            monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
         monsterCard.transform.SetParent(nextBlock);
         monster.transform.SetParent(nextBlock);
         //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
         //monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
         monster.GetComponent<ThisMonster>().block = nextBlock;
         monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-
+        yield return new WaitForSeconds(0.3f);
         BlocksManager.Instance.MonsterChange();
-        if (monster.GetComponent<ThisMonster>().monsterBase != null)
+        if (monster.GetComponent<ThisMonster>().monsterBase != null&&monster!=null)
             monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
        
     }
@@ -430,7 +438,10 @@ public class Skills : MonoSingleton<Skills>
             yield return new WaitForSeconds(0.05f);
 
             AudioManager.Instance.Exchange.Play();
-
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
+            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null && nextMonster != null)
+                nextMonster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(nextblock);
             nextMonsterCard.transform.SetParent(block);
             nextMonster.transform.SetParent(block);
             //nextMonster.GetComponent<ThisMonster>().stateBlock.SetParent(block);
@@ -446,26 +457,29 @@ public class Skills : MonoSingleton<Skills>
 
             nextMonster.transform.DOLocalMove(Vector3.zero, 0.3f);
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-
+            yield return new WaitForSeconds(0.3f);
             BlocksManager.Instance.MonsterChange();
-            if (monster.GetComponent<ThisMonster>().monsterBase != null)
-                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
-            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null)
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextblock);
+            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null && nextMonster != null)
                 nextMonster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(block);
         }
         else 
         {
             yield return new WaitForSeconds(0.05f);
             Transform nextBlock = BlocksManager.Instance.GetNextBlock(block).transform;
+        
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
             monsterCard.transform.SetParent(nextBlock);
             monster.transform.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
             monster.GetComponent<ThisMonster>().block = nextBlock;
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-
+            yield return new WaitForSeconds(0.3f);
             BlocksManager.Instance.MonsterChange();
-            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
                 monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
         }
 
@@ -483,7 +497,10 @@ public class Skills : MonoSingleton<Skills>
             yield return new WaitForSeconds(0.05f);
 
             AudioManager.Instance.Exchange.Play();
-
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
+            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null && nextMonster != null)
+                nextMonster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(nextblock);
             nextMonsterCard.transform.SetParent(block);
             nextMonster.transform.SetParent(block);
             //nextMonster.GetComponent<ThisMonster>().stateBlock.SetParent(block);
@@ -499,26 +516,30 @@ public class Skills : MonoSingleton<Skills>
 
             nextMonster.transform.DOLocalMove(Vector3.zero, 0.3f);
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-
+            yield return new WaitForSeconds(0.3f);
             BlocksManager.Instance.MonsterChange();
-            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
                 monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextblock);
-            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null)
+            if (nextMonster.GetComponent<ThisMonster>().monsterBase != null && nextMonster != null)
                 nextMonster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(block);
         }
         else
         {
             yield return new WaitForSeconds(0.05f);
             Transform nextBlock = BlocksManager.Instance.GetNextIntervalBlock(block).transform;
+
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
+
             monsterCard.transform.SetParent(nextBlock);
             monster.transform.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
             monster.GetComponent<ThisMonster>().block = nextBlock;
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-
+            yield return new WaitForSeconds(0.3f);
             BlocksManager.Instance.MonsterChange();
-            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
                 monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
         }
 
@@ -566,7 +587,10 @@ public class Skills : MonoSingleton<Skills>
                 monster.GetComponent<ThisMonster>().maxHealth += (int)health / 2;
                 //Destroy(nextMonster.GetComponent<ThisMonster>().stateBlock.gameObject);
                 nextMonster.GetComponent<ThisMonster>().isSwallowed = true;
+                nextMonsterCard.GetComponent<ThisMonsterCard>().summonTimes--;
                 BattleField.Instance.StartMonsterDead(nextMonster, nextMonsterCard);
+                if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
                 monsterCard.transform.SetParent(nextBlock);
                 monster.transform.SetParent(nextBlock);
                 //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
@@ -574,9 +598,9 @@ public class Skills : MonoSingleton<Skills>
                 monster.GetComponent<ThisMonster>().block = nextBlock;
                 monster.transform.DOLocalMove(Vector3.zero, 0.3f);
                 AudioManager.Instance.swallow.Play();
-
+                yield return new WaitForSeconds(0.3f);
                 BlocksManager.Instance.MonsterChange();
-                if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
                     monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
                 yield return new WaitForSeconds(0.3f);
                 reverse.Invoke();
@@ -605,18 +629,20 @@ public class Skills : MonoSingleton<Skills>
                 
                 monster.GetComponent<ThisMonster>().reverse = 0;
                 nextBlock= BlocksManager.Instance.GetPreviousBlock(block).transform;
+                if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
                 monsterCard.transform.SetParent(nextBlock);
                 monster.transform.SetParent(nextBlock);
                 //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
                 // monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
                 monster.GetComponent<ThisMonster>().block = nextBlock;
                 monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-                
+                yield return new WaitForSeconds(0.3f);
 
                 BlocksManager.Instance.MonsterChange();
-                if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
                     monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
-                yield return new WaitForSeconds(0.3f);
+                //yield return new WaitForSeconds(0.1f);
                 reverse.Invoke();
             }
 
@@ -628,17 +654,19 @@ public class Skills : MonoSingleton<Skills>
             Debug.Log("hhh");
             yield return new WaitForSeconds(0.05f);
             Transform nextBlock = BlocksManager.Instance.GetNextBlock(block).transform;
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
             monsterCard.transform.SetParent(nextBlock);
             monster.transform.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
             monster.GetComponent<ThisMonster>().block = nextBlock;
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-            
-            BlocksManager.Instance.MonsterChange();
-            if (monster.GetComponent<ThisMonster>().monsterBase != null)
-                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
             yield return new WaitForSeconds(0.3f);
+            BlocksManager.Instance.MonsterChange();
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
+            //yield return new WaitForSeconds(0.1f);
             reverse.Invoke();
         }
     }
@@ -668,7 +696,11 @@ public class Skills : MonoSingleton<Skills>
                 monster.GetComponent<ThisMonster>().maxHealth += (int)health / 2;
                 //Destroy(nextMonster.GetComponent<ThisMonster>().stateBlock.gameObject);
                 nextMonster.GetComponent<ThisMonster>().isSwallowed = true;
+
+                nextMonsterCard.GetComponent<ThisMonsterCard>().summonTimes--;
                 BattleField.Instance.StartMonsterDead(nextMonster, nextMonsterCard);
+                if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
                 monsterCard.transform.SetParent(nextBlock);
                 monster.transform.SetParent(nextBlock);
                 //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
@@ -676,13 +708,13 @@ public class Skills : MonoSingleton<Skills>
                 monster.GetComponent<ThisMonster>().block = nextBlock;
                 monster.transform.DOLocalMove(Vector3.zero, 0.3f);
                 AudioManager.Instance.swallow.Play();
+                yield return new WaitForSeconds(0.3f);
 
-                
                 BlocksManager.Instance.MonsterChange();
-                if(monster.GetComponent<ThisMonster>().monsterBase!=null)
+                if(monster.GetComponent<ThisMonster>().monsterBase!=null && monster != null)
                     monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
 
-                yield return new WaitForSeconds(0.3f);
+                
                 reverse.Invoke();
                 yield break;
             }
@@ -724,17 +756,19 @@ public class Skills : MonoSingleton<Skills>
                 monster.GetComponent<ThisMonster>().isCW = true;
                 monster.GetComponent<ThisMonster>().reverse = 0;
                 nextBlock = BlocksManager.Instance.GetNextBlock(block).transform;
+                if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                    monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
                 monsterCard.transform.SetParent(nextBlock);
                 monster.transform.SetParent(nextBlock);
                 //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
                 // monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
                 monster.GetComponent<ThisMonster>().block = nextBlock;
                 monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-                
 
+                yield return new WaitForSeconds(0.3f);
 
                 BlocksManager.Instance.MonsterChange();
-                if (monster.GetComponent<ThisMonster>().monsterBase != null)
+                if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
                     monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
                 yield return new WaitForSeconds(0.3f);
                 reverse.Invoke();
@@ -748,15 +782,17 @@ public class Skills : MonoSingleton<Skills>
             monster.GetComponent<ThisMonster>().reverse = 0;
             yield return new WaitForSeconds(0.05f);
             Transform nextBlock = BlocksManager.Instance.GetPreviousBlock(block).transform;
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
+                monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Begin(block);
             monsterCard.transform.SetParent(nextBlock);
             monster.transform.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.SetParent(nextBlock);
             //monster.GetComponent<ThisMonster>().stateBlock.DOLocalMove(monster.GetComponent<ThisMonster>().initialStateBlock, 0.2f);
             monster.GetComponent<ThisMonster>().block = nextBlock;
             monster.transform.DOLocalMove(Vector3.zero, 0.3f);
-            
+            yield return new WaitForSeconds(0.3f);
             BlocksManager.Instance.MonsterChange();
-            if (monster.GetComponent<ThisMonster>().monsterBase != null)
+            if (monster.GetComponent<ThisMonster>().monsterBase != null && monster != null)
                 monster.GetComponent<ThisMonster>().monsterBase.MonsterChangePosition_Over(nextBlock);
             yield return new WaitForSeconds(0.3f);
             reverse.Invoke();

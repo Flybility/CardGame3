@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster22 : MonoBehaviour
+public class Monster22 : MonsterBase
 {
-    public ThisMonster monster;
+    
     public Blocks block;
     public float multipleRate;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         monster = GetComponent<ThisMonster>();
         block = monster.block.GetComponent<Blocks>();

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Monster26 : MonsterBase
 {
-    public override void MonsterRound_Begin()
+    public override void MonsterAttack_end()
     {
-        Skills.Instance.ArmoredSelf(monster, 20);
+        Skills.Instance.ArmoredSelf(monster, 30);
         Skills.Instance.StartExchangeBesidePosition(monster.gameObject);
     }
 
