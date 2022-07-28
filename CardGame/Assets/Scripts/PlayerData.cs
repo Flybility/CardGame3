@@ -31,7 +31,7 @@ public class PlayerData : MonoSingleton<PlayerData>
     public int perRoundHealthDecrease;//每回合固定降低生命值
     public int extraPerRoundHealthDecrease;//额外每回合降低生命值
     public float  extraHurt;//额外受到伤害比例
-
+    public int nodeRecoverValue = 15;
     //Buff状态
     public int attackTimes;//攻击次数
     public int armorCount;//护甲层数
@@ -57,9 +57,13 @@ public class PlayerData : MonoSingleton<PlayerData>
     public int awardMonsterCardAmount;
     public int awardEquipCardAmount;
     public bool isAngerCountOpen;
+    public int attackDizzyRate;
     public int counterThreshold;
-    
-
+    public int extraRecover;
+    public int armorRecoverPerRound;//每回合开始增加护甲数
+    public bool isArmorClear;//护甲是否清空
+    public bool slayAddAnger;//击杀是否增加反击
+    public int perRoundKill;
     public int perRoundHurt;
 
     private GameObject attackTimeBar;//攻击次数增加栏
@@ -106,17 +110,16 @@ public class PlayerData : MonoSingleton<PlayerData>
         playerMonsterCards.Add(cardData.CopyMonsterCard(31));
         playerMonsterCards.Add(cardData.CopyMonsterCard(37));
 
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(0));
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(1));
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(2));
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(4));
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(5));
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(8));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(33));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(19));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(23));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(25));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(20));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(21));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(16));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(18));
-        playerEquipmentCards.Add(cardData.CopyEquipmentCard(30));
         playerEquipmentCards.Add(cardData.CopyEquipmentCard(31));
-        //playerEquipmentCards.Add(cardData.CopyEquipmentCard(28));
+        playerEquipmentCards.Add(cardData.CopyEquipmentCard(28));
         //playerEquipmentCards.Add(cardData.CopyEquipmentCard(10));
         //playerEquipmentCards.Add(cardData.CopyEquipmentCard(7));
 
@@ -154,9 +157,10 @@ public class PlayerData : MonoSingleton<PlayerData>
     }
     IEnumerator PerRoundChange()
     {
+        perRoundKill = 0;
         HealthDecrease(perRoundHealthDecrease + extraPerRoundHealthDecrease);
         yield return new WaitForSeconds(0.2f);
-        if (armorCount > 0)         DecreaseArmor(armorCount);
+        if (armorCount > 0&&isArmorClear)         DecreaseArmor(armorCount);
         if (scareCount > 0)         DecreaseScareCount(1);
         if (angerCount > 0)         DecreaseCounterattackCount(angerCount/2);
         if (burnsCount > 0)         DecreaseBurns(1);
@@ -171,6 +175,11 @@ public class PlayerData : MonoSingleton<PlayerData>
 
         BurnsEffect();
 
+        yield return new WaitForSeconds(0.4f);
+        if (armorRecoverPerRound > 0)
+        {
+            AddArmor(armorRecoverPerRound, Skills.Instance.armorCounter);
+        }
 
     }
     public void DecreaseAttackBesides()

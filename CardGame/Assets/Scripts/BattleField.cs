@@ -601,7 +601,8 @@ public class BattleField : MonoSingleton<BattleField>
                 AudioManager.Instance.playerAttack.Play();
                 yield return new WaitForSeconds(0.05f);
                 //monster.GetComponent<ThisMonster>().HealthDecrease(PlayerData.Instance.attacks);
-                Skills.Instance.AttackMonster(PlayerData.Instance.currentAttacks, monster,true);
+               
+                Skills.Instance.AttackMonster(PlayerData.Instance.currentAttacks* PlayerData.Instance.attackDizzyRate, monster,true);
                 
                 yield return new WaitForSeconds(0.3f);
                 //monsterChange.Invoke();
@@ -979,6 +980,13 @@ public class BattleField : MonoSingleton<BattleField>
         }
        
         Destroy(monster);
+        PlayerData.Instance.perRoundKill++;
+        if (PlayerData.Instance.perRoundKill == 2)
+        {
+            PlayerData.Instance.perRoundKill = 0;
+            PlayerData.Instance.AddCounterattackCount(1, Skills.Instance.counterattackCounter);//增加反击
+            
+        }
         Debug.Log("怪物死亡");
         AudioManager.Instance.monsterDead1.Play();
         //monster.GetComponent<ThisMonster>().

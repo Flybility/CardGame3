@@ -28,8 +28,9 @@ public class Equipment26 : MonoBehaviour
     }
     private void OnDestroy()
     {
- 
-        PlayerData.Instance.isAngerCountOpen = false;
-
+        if (isInEquipment)
+        {
+            PlayerData.Instance.isAngerCountOpen = false;
+        }
     }
 }

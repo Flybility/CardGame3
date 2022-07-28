@@ -8,41 +8,54 @@ public class CardDatabase : MonoSingleton<CardDatabase>
     public  List<MonsterCard> monsterCardList = new List<MonsterCard>();
     private void Awake()
     {
-        equipmentCardList.Add(new EquipmentCard( 0, "蓝宝石",     10, 10, "使指定的心魔顺时针与下一个心魔互换位置",                                                Resources.Load<Sprite>("EquipmentImages/01"),  false));
-        equipmentCardList.Add(new EquipmentCard( 1, "紫宝石",     10, 10, "使指定的心魔顺时针与下一个相间的心魔互换位置",                                          Resources.Load<Sprite>("EquipmentImages/02"),  false));
-        equipmentCardList.Add(new EquipmentCard( 2, "红宝石",     10, 10, "下次攻击对目标攻击2次",                                                                 Resources.Load<Sprite>("EquipmentImages/03"),  false));
-        equipmentCardList.Add(new EquipmentCard( 3, "绿宝石",     10,  3, "选择一名心魔使其本回合免疫任何伤害",                                                    Resources.Load<Sprite>("EquipmentImages/04"),  false));
-        equipmentCardList.Add(new EquipmentCard( 4, "橙宝石",     10,  3, "下次攻击伤害分摊至相邻的心魔，一回合限用一次",                                          Resources.Load<Sprite>("EquipmentImages/01"),  false));
-        equipmentCardList.Add(new EquipmentCard( 5, "黄宝石",     10,  2, "下次攻击伤害分摊至相间的心魔，一回合限用一次",                                          Resources.Load<Sprite>("EquipmentImages/01"),  false));
-        equipmentCardList.Add(new EquipmentCard( 6, "橙水晶",     10,  3, "下次攻击间位获得与被攻击目标同样的伤害,一回合限用一次",                                 Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard( 0, "      ",     10, 10, "使指定的心魔顺时针与下一个心魔互换位置",                                                Resources.Load<Sprite>("EquipmentImages/00"),  false));
+        equipmentCardList.Add(new EquipmentCard( 1, "      ",     10, 10, "使指定的心魔顺时针与下一个相间的心魔互换位置",                                          Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard( 2, "红宝石",     10,  2, "下次攻击对目标攻击2次",                                                                 Resources.Load<Sprite>("EquipmentImages/02"),  false));
+        equipmentCardList.Add(new EquipmentCard( 3, "蓝宝石",     10,  2, "选择一名心魔使其本回合免疫任何伤害",                                                    Resources.Load<Sprite>("EquipmentImages/03"),  false));
+        equipmentCardList.Add(new EquipmentCard( 4, "橙水晶",     10,  2, "下次攻击伤害分摊至相邻的心魔，一回合限用一次",                                          Resources.Load<Sprite>("EquipmentImages/04"),  false));
+        equipmentCardList.Add(new EquipmentCard( 5, "黄水晶",     10,  2, "下次攻击伤害分摊至相间的心魔，一回合限用一次",                                          Resources.Load<Sprite>("EquipmentImages/05"),  false));
+        equipmentCardList.Add(new EquipmentCard( 6, "橙水晶",     10,  3, "下次攻击间位获得与被攻击目标同样的伤害,一回合限用一次",                                 Resources.Load<Sprite>("EquipmentImages/06"),  false));
         equipmentCardList.Add(new EquipmentCard( 7, "黄水晶",     10,  3, "下次攻击邻位获得与被攻击目标同样的伤害，一回合限用一次",                                Resources.Load<Sprite>("EquipmentImages/01"),  false));        
-        equipmentCardList.Add(new EquipmentCard( 8, "酒精",       10,  5, "被击中的目标本回合内若受到“爆炸伤害”被添加3层“灼伤”",                               Resources.Load<Sprite>("EquipmentImages/08"),  false));
-        equipmentCardList.Add(new EquipmentCard( 9, "燃烧的烟头", 10,100, "场上所有带有“灼伤”效果的敌人每回合受到的“灼伤”伤害+6”",                            Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(10, "小喇叭",     10,  3, "被击中的目标本回合内若受到“爆炸伤害”被添加1层“眩晕”",                               Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard( 8, "酒精",       10,  2, "被击中的目标本回合内若受到“爆炸伤害”被添加3层“灼伤”",                               Resources.Load<Sprite>("EquipmentImages/08"),  false));
+        equipmentCardList.Add(new EquipmentCard( 9, "燃烧的烟头", 10,100, "场上所有带有“灼伤”效果的敌人每回合受到的“灼伤”伤害+6”",                            Resources.Load<Sprite>("EquipmentImages/09"),  true));
+        equipmentCardList.Add(new EquipmentCard(10, "悲鸣号角",   10,  2, "被击中的目标本回合内若受到“爆炸伤害”被添加1层“眩晕”",                               Resources.Load<Sprite>("EquipmentImages/10"),  false));
         equipmentCardList.Add(new EquipmentCard(11, "花纹手绢",   10,100, "对眩晕态的敌人攻击增加1倍",                                                             Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(12, "断裂铅笔",   10,  5, "对一个目标造成6点伤害，若目标处在眩晕态造成16点伤害",                                   Resources.Load<Sprite>("EquipmentImages/01"),  false));
-        equipmentCardList.Add(new EquipmentCard(13, "催眠怀表",   10, 10, "使相邻位置的心魔互换",                                                                  Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(12, "断裂铅笔",   10,  2, "对一个目标造成6点伤害，若目标处在眩晕态造成16点伤害",                                   Resources.Load<Sprite>("EquipmentImages/12"),  false));
+        equipmentCardList.Add(new EquipmentCard(13, "催眠怀表",   10,  1, "令一名心魔眩晕一回合",                                                                  Resources.Load<Sprite>("EquipmentImages/01"),  false));
         equipmentCardList.Add(new EquipmentCard(14, "纸杯蛋糕",   10, 10, "休息节点回复的情绪增至15点（初始10点）",                                                Resources.Load<Sprite>("EquipmentImages/01"),  true));
         equipmentCardList.Add(new EquipmentCard(15, "幸运草",     10, 10, "情绪最大值扩充15",                                                                      Resources.Load<Sprite>("EquipmentImages/15"),  true));
         equipmentCardList.Add(new EquipmentCard(16, "秘密日记本", 10,  3, "丢弃所有手牌，重新抽一次牌",                                                            Resources.Load<Sprite>("EquipmentImages/16"),  false));
-        equipmentCardList.Add(new EquipmentCard(17, "发霉面包",   10,  3, "情绪回复15点，血量上限降低5点",                                                         Resources.Load<Sprite>("EquipmentImages/01"),  false));
-        equipmentCardList.Add(new EquipmentCard(18, "烤肉",       10,  2, "情绪回复10点",                                                                          Resources.Load<Sprite>("EquipmentImages/18"),  false));
-        equipmentCardList.Add(new EquipmentCard(19, "    ",       10,  3, "每击杀1名心魔，额外回复3点情绪",                                                        Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(20, "破旧雨伞",   10,  3, "每回合开始获得10点护甲",                                                                Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(21, "啜泣外衣",   10,100, "每回合获得15点护甲，局末初始伤害 - 5",                                                  Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(22, "安眠药",     10,  5, "恢复50点情绪",                                                                          Resources.Load<Sprite>("EquipmentImages/01"),  false));
-        equipmentCardList.Add(new EquipmentCard(23, "玩具盾牌",   10, 10, "获得60点护甲",                                                                          Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(17, "        ",   10,  3, "情绪回复15点，血量上限降低5点",                                                         Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(18, "面包",       10,  2, "情绪回复15点",                                                                          Resources.Load<Sprite>("EquipmentImages/18"),  false));
+        equipmentCardList.Add(new EquipmentCard(19, "破碎时光",   10,  3, "每击杀1名心魔，额外回复3点情绪",                                                        Resources.Load<Sprite>("EquipmentImages/19"),  true));
+        equipmentCardList.Add(new EquipmentCard(20, "结痂",       10,  3, "每回合开始获得10点护甲",                                                                Resources.Load<Sprite>("EquipmentImages/20"),  true));
+        equipmentCardList.Add(new EquipmentCard(21, "鸭舌帽",     10,  3, "护甲每回合不再清空",                                                                    Resources.Load<Sprite>("EquipmentImages/21"),  true));
+        equipmentCardList.Add(new EquipmentCard(22, "      ",     10,  1, "恢复50点情绪",                                                                          Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(23, "玩具盾牌",   10, 10, "获得60点护甲",                                                                          Resources.Load<Sprite>("EquipmentImages/23"),  false));
         equipmentCardList.Add(new EquipmentCard(24, "    ",       10, 10, "回合末攻击伤害 + 8",                                                                    Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(25, "    ",       10, 10, "该回合末攻击伤害 + 16",                                                                 Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(26, "叛逆",       10,  3, "每受到一次大于4点的伤害，增加一层反击",                                                 Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(27, "烟花",       10,  3, "对一个目标造成13点伤害，邻位受到6点伤害",                                               Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(25, "临终遗言",   10, 10, "每击杀2名心魔，增加1层反击",                                                            Resources.Load<Sprite>("EquipmentImages/25"),  true));
+        equipmentCardList.Add(new EquipmentCard(26, "断裂铅笔",   10,  3, "每受到一次大于4点的伤害，增加一层反击",                                                 Resources.Load<Sprite>("EquipmentImages/01"),  true));
+        equipmentCardList.Add(new EquipmentCard(27, "    ",       10,  3, "对一个目标造成13点伤害，邻位受到6点伤害",                                               Resources.Load<Sprite>("EquipmentImages/01"),  false));
         equipmentCardList.Add(new EquipmentCard(28, "玩具弓",     10,  2, "对一个目标造成25点伤害",                                                                Resources.Load<Sprite>("EquipmentImages/28"),  false));
-        equipmentCardList.Add(new EquipmentCard(29, "英雄护腕",   10,  3, "增加2层反击",                                                                           Resources.Load<Sprite>("EquipmentImages/01"),  false));
-        equipmentCardList.Add(new EquipmentCard(30, "英雄护甲",   10,  3, "每回合开始获得10点护甲",                                                                Resources.Load<Sprite>("EquipmentImages/30"),  true));
-        equipmentCardList.Add(new EquipmentCard(31, "安眠药水",   10,  2, "清空所有恐惧",                                                                          Resources.Load<Sprite>("EquipmentImages/31"),  false));
-        equipmentCardList.Add(new EquipmentCard(32, "水果硬糖",   10,  3, "增加2层反击",                                                                           Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(33, "",           10,  3, "每回合开始获得10点护甲",                                                                Resources.Load<Sprite>("EquipmentImages/01"),  true));
-        equipmentCardList.Add(new EquipmentCard(33, "沙漏",        3,  3, "指定一只心魔进行回收",                                                                  Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(29, "        ",   10,  3, "增加2层反击",                                                                           Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(30, "        ",   10,  3, "每回合开始获得10点护甲",                                                                Resources.Load<Sprite>("EquipmentImages/30"),  true));
+        equipmentCardList.Add(new EquipmentCard(31, "庇佑之物",   10,  2, "自身每有1层恐惧效果，获得8点护甲",                                                      Resources.Load<Sprite>("EquipmentImages/31"),  false));
+        equipmentCardList.Add(new EquipmentCard(32, "水果硬糖",   10,  2, "清空所有恐惧",                                                                          Resources.Load<Sprite>("EquipmentImages/01"),  true));
+        equipmentCardList.Add(new EquipmentCard(33, "空白容器",    3,  3, "指定一只心魔进行回收，所有数值回归初始状态",                                            Resources.Load<Sprite>("EquipmentImages/01"),  false));
+        equipmentCardList.Add(new EquipmentCard(34, "童年伙伴",   10,  3, "每有2层恐惧增加5点攻击力",                                                              Resources.Load<Sprite>("EquipmentImages/34"), true));
+        equipmentCardList.Add(new EquipmentCard(35, "弹弓",       10,  2, "每回合增加一次攻击次数",                                                                Resources.Load<Sprite>("EquipmentImages/31"), false));
+        equipmentCardList.Add(new EquipmentCard(36, "小马驹",     10,  3, "每放置三个心魔增加一次攻击次数",                                                        Resources.Load<Sprite>("EquipmentImages/01"), true));
+        equipmentCardList.Add(new EquipmentCard(37, "小汽车",     10,  3, "每回合增加一次移动次数",                                                                Resources.Load<Sprite>("EquipmentImages/01"), true));
+        equipmentCardList.Add(new EquipmentCard(38, "披风",        3,  3, "超出最大情绪上限的情绪回复量的1/2转化为护甲",                                           Resources.Load<Sprite>("EquipmentImages/01"), false));
+        equipmentCardList.Add(new EquipmentCard(39, "吾心之声",   10,  2, "选择1名心魔，下次玩家的直接攻击所有相同心魔均受到相同伤害",                             Resources.Load<Sprite>("EquipmentImages/31"), false));
+        equipmentCardList.Add(new EquipmentCard(40, "惊喜时刻",   10,  3, "选择1名心魔，场上每有1只相同心魔，下次攻击额外攻击1次",                                 Resources.Load<Sprite>("EquipmentImages/01"), true));
+        equipmentCardList.Add(new EquipmentCard(41, "涌泉",       10,  3, "选择1个位置，该位置的所有种类的种子的数量翻倍",                                         Resources.Load<Sprite>("EquipmentImages/01"), true));
+        equipmentCardList.Add(new EquipmentCard(42, "饱腹一餐",    3,  3, "清空1个位置上的所有种子，每清空1枚情绪上升6点",                                         Resources.Load<Sprite>("EquipmentImages/01"), false));
+        equipmentCardList.Add(new EquipmentCard(43, "黑夜孤火",   10,  2, "为1名心魔添加1层畏火，若心魔具有植物性，添加3层",                                       Resources.Load<Sprite>("EquipmentImages/31"), false));
+        
+
+
+
 
         monsterCardList.Add(new MonsterCard(00, "伤痕",        8,  3,  2,  1, "",                                                                                                                                       Resources.Load<Sprite>("CardImages/00"), Resources.Load<Sprite>("CardBackgrounds/2"),  false));
         monsterCardList.Add(new MonsterCard(01, "愤怒",        5,  2,  1,  1, "击杀后爆炸,对左右位置的心魔造成8点爆炸伤害",                                                                                             Resources.Load<Sprite>("CardImages/01"), Resources.Load<Sprite>("CardBackgrounds/2"),  false));

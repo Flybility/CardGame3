@@ -424,7 +424,7 @@ public class ThisMonster : MonoBehaviour
                 monsterCard.GetComponent<ThisMonsterCard>().summonTimes--;
                 //Destroy(stateBlock.gameObject);
                 //击杀怪物回复生命值
-                PlayerData.Instance.HealthRecover(currentAwards);
+                PlayerData.Instance.HealthRecover(currentAwards+PlayerData.Instance.extraRecover);
                 BattleField.Instance.StartMonsterDead(this.gameObject, monsterCard);
             }
             //else{ return;}

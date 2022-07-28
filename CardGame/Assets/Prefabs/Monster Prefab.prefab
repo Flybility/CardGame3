@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edf7d9b7043ba74e9c17cb90b073e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterBase: {fileID: 0}
   monsterCard: {fileID: 0}
   block: {fileID: 0}
   initialStateBlock: {x: 0, y: 0, z: 0}
@@ -299,7 +300,6 @@ MonoBehaviour:
   attackAttachedBondages: 0
   dizzyCount: 0
   burnsCount: 0
-  burnsDamage: 10
   absorbCount: 0
   isAbsorbBoom: 0
   absorbDamages: 0
@@ -327,21 +327,26 @@ MonoBehaviour:
   isNeighbourAwardMultiple: 0
   isNeiboursAttackMultiple: 0
   isIntervalAttackMultiple: 0
+  isSwallowed: 0
   leftMonster: {fileID: 0}
   rightMonster: {fileID: 0}
+  isCW: 0
+  reverse: 0
   neighbours: []
   intervals: []
   besides: []
   isBesideAward: 0
   isIntervalAttack: 0
   isBesideAttack: 0
-  isBesideRecover: 0
-  isSelfArmored: 0
+  isSummonMonster: 0
   selfArmoredValue: 0
-  isBesideArmored: 0
   isRoundExchangeBeside: 0
   isRoundExchangeInterval: 0
   isRoundSwallowBeside: 0
+  isAttackPlusbyAmount: 0
+  attackPlusRate: 0
+  plusAttack: 0
+  isAttakMultiByAmount: 0
 --- !u!1 &3336817174295435958
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -56}
+  m_AnchoredPosition: {x: 0, y: -54.1}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7214049775769794639
@@ -653,8 +658,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 32}
-  m_SizeDelta: {x: 180, y: 270}
+  m_AnchoredPosition: {x: 0, y: 13.6}
+  m_SizeDelta: {x: 135, y: 202.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &995581772719212735
 CanvasRenderer:

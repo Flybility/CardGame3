@@ -1255,8 +1255,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -500}
-  m_SizeDelta: {x: 1200, y: 200}
+  m_AnchoredPosition: {x: 0, y: 466.49997}
+  m_SizeDelta: {x: 1360.55, y: 147}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266516587
 MonoBehaviour:
@@ -1275,10 +1275,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 150, y: 90}
+  m_CellSize: {x: 120, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
@@ -4877,6 +4877,7 @@ MonoBehaviour:
   perRoundHealthDecrease: 5
   extraPerRoundHealthDecrease: 0
   extraHurt: 0
+  nodeRecoverValue: 15
   attackTimes: 0
   armorCount: 0
   scareCount: 0
@@ -4898,7 +4899,13 @@ MonoBehaviour:
   awardMonsterCardAmount: 5
   awardEquipCardAmount: 3
   isAngerCountOpen: 0
+  attackDizzyRate: 1
   counterThreshold: 0
+  extraRecover: 0
+  armorRecoverPerRound: 0
+  isArmorClear: 0
+  slayAddAnger: 0
+  perRoundKill: 0
   perRoundHurt: 0
   attackBesidesBar: {fileID: 0}
   attackIntervalBar: {fileID: 0}
@@ -10010,22 +10017,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 896810262}
-        m_TargetAssemblyTypeName: PlayerData, Assembly-CSharp
-        m_MethodName: HealthRecover
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 15
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1953507946}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1590227581}
+        m_TargetAssemblyTypeName: Skills, Assembly-CSharp
+        m_MethodName: NodeRecover
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11670,8 +11677,8 @@ MonoBehaviour:
   canAddAttacks: 0
   multipleAttacks: 0
   multipleAwards: 0
-  thornCount: 2
-  assimilationCount: 0
+  thornCount: 1
+  assimilationCount: 1
   parasiteCount: 0
 --- !u!1 &1993308522
 GameObject:
@@ -11726,10 +11733,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 150, y: 90}
+  m_CellSize: {x: 120, y: 90}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1

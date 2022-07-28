@@ -33,7 +33,7 @@ public class ThisEquiptmentCard : MonoBehaviour
     void Start()
     {
         ShowCardStaticStatus();
-        if (isStatic) { transform.GetChild(1).gameObject.SetActive(false); }
+        if (isStatic) { transform.GetChild(2).gameObject.SetActive(false); }
     }
 
     // Update is called once per frame

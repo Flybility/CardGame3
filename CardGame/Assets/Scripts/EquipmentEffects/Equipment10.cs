@@ -47,7 +47,7 @@ public class Equipment10 : MonoBehaviour, IPointerClickHandler
     {
         if (BattleField.Instance.usingEquipment != null)
         {
-            if (card.id == BattleField.Instance.usingEquipment.GetComponent<ThisEquiptmentCard>().id)
+            if (card.id == BattleField.Instance.usingEquipment.GetComponent<ThisEquiptmentCard>().id && monster.GetComponent<ThisMonster>().isAddExplodeDizzy == false)
             {
                 Skills.Instance.AddExplodedDizzy(monster);
                 BattleField.Instance.usingEquipment = null;

@@ -312,6 +312,25 @@ public class Skills : MonoSingleton<Skills>
             monster.GetComponent<ThisMonster>().multipleAwards = count;
         }
     }
+    public void RecycleToHand(GameObject monster)
+    {
+        GameObject card = monster.GetComponent<ThisMonster>().monsterCard;
+
+        GameObject newCard = Instantiate(BattleField.Instance.monsterCardPrefab, monster.transform);
+        newCard.GetComponent<ThisMonsterCard>().card = CardDatabase.Instance.CopyMonsterCard(card.GetComponent<ThisMonsterCard>().id);
+        BattleField.Instance.monsterInBattle.Remove(monster);
+        monster.GetComponent<ThisMonster>().isSwallowed = true;
+        Destroy(monster,0.2f);
+        card.transform.SetParent(BattleField.Instance.usedArea);
+        Destroy(card);
+        newCard.SetActive(true);
+        newCard.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        newCard.transform.SetParent(BattleField.Instance.monsterArea);
+
+        BattleField.Instance.AddToHand.Invoke();
+
+        BattleField.Instance.ChangeParent.Invoke();
+    }
     public void RecoverBesides(Transform block, int count)
     {       
         foreach (var monster in BlocksManager.Instance.GetNeighbours(block))
@@ -346,6 +365,10 @@ public class Skills : MonoSingleton<Skills>
     public void ArmoredSelf(ThisMonster monster,int count)
     {
         monster.AddArmor(count, armorCounter);
+    }
+    public void NodeRecover()
+    {
+        PlayerData.Instance.HealthRecover(PlayerData.Instance.nodeRecoverValue);
     }
     public void StartExchangeBesidePosition(GameObject monster)
     {

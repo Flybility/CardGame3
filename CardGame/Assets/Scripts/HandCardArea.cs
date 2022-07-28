@@ -45,7 +45,7 @@ public class HandCardArea : MonoSingleton<HandCardArea>
             //    card.transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.25f);
             //}
             childs.Add(transform.GetChild(i).gameObject);
-
+            card.GetComponent<MouseInteraction>().enabled = true;
         }
 
         yield return new WaitForSeconds(0.2f);

@@ -8,7 +8,7 @@ public class Equipment9 : MonoBehaviour
     public MouseInteraction mi;
     public ThisEquiptmentCard card;
     public int count;//层数
-    public int initialDamage;
+    private int initialDamage;
     // Start is called before the first frame update
     void Start()
     {

@@ -28,7 +28,7 @@ public class Blocks : MonoBehaviour, IPointerClickHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (highLightImage.activeInHierarchy&& eventData.button == PointerEventData.InputButton.Left)
+        if (highLightImage.activeInHierarchy&& eventData.button == PointerEventData.InputButton.Left&&transform.childCount<2)
         {
             BattleField.Instance.SummonConfirm(transform, multipleAttacks, multipleAwards);            
         }
